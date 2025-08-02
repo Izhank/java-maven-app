@@ -1,20 +1,26 @@
 def buildJar() {
-    echo "building the application..."
-    sh 'mvn package'
-} 
+    echo "Building the application..."
+    def mvnHome = tool 'maven-3.9'
+    sh "${mvnHome}/bin/mvn clean package -DskipTests"
+}
 
 def buildImage() {
-    echo "building the docker image..."
+    echo "Building the Docker image..."
     withCredentials([usernamePassword(credentialsId: 'DockerHub-Credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
-        sh 'docker build -t izhank53/demo-app:jma-2.0 .'
+        def imageTag = "izhank53/demo-app:${env.BUILD_NUMBER}"
+        sh "docker build -t ${imageTag} ."
         sh "echo $PASS | docker login -u $USER --password-stdin"
-        sh 'docker push izhank53/demo-app:jma-2.0'
+        sh "docker push ${imageTag}"
+
+        // Optional: also push latest tag
+        sh "docker tag ${imageTag} izhank53/demo-app:latest"
+        sh "docker push izhank53/demo-app:latest"
     }
-} 
+}
 
 def deployApp() {
-    echo 'deploying the application...'
-} 
+    echo 'Deploying the application...'
+}
 
 return this
 
