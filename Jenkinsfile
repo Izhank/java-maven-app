@@ -3,8 +3,9 @@ def gv
 pipeline {
     agent any
     stages {
-         stage("hello") {
+         stage("hell") {
             steps {
+                script{
                     hell()
                 }
             }
