@@ -5,7 +5,6 @@ pipeline {
     stages {
          stage("hello") {
             steps {
-                script {
                     hell()
                 }
             }
