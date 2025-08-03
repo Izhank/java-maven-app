@@ -1,5 +1,7 @@
+#!/usr/bin/env groovy
+
+@Library('Shared')
 def gv
-@Library('Shared') _
 pipeline {
     agent any
     stages {
