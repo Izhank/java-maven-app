@@ -1,14 +1,13 @@
 #!/usr/bin/env groovy
 
-@Library('Shared') _
+
 def gv
 pipeline {
     agent any
     stages {
-         stage("hell") {
+         stage("Greet") {
             steps {
-                script{
-                    hell()
+                echo "Hello friends"
                 }
             }
         }
