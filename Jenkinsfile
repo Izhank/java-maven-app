@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 
-@Library('Shared')
+@Library('Shared') _
 def gv
 pipeline {
     agent any
