@@ -1,8 +1,15 @@
 def gv
-
+@Library('Shared') _
 pipeline {
     agent any
     stages {
+         stage("hello") {
+            steps {
+                script {
+                    gv = load "hello.groovy"
+                }
+            }
+        }
         stage("init") {
             steps {
                 script {
