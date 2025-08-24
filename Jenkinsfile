@@ -11,7 +11,7 @@ pipeline {
                 script {
                     def dockerCMD = 'docker run -p 3080:3080 -d izhank53/react-nodejs-example:latest'
                     sshagent(['AzureVmKey']) {
-                        sh " ssh -o StrictHostKeyChecking=no -r * azure@57.159.27.246 ${dockerCMD}"
+                        sh " ssh -o StrictHostKeyChecking=no * azure@57.159.27.246 ${dockerCMD}"
                         
                     }
                 }
