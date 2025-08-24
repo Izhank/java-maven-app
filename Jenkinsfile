@@ -1,14 +1,12 @@
 #!/usr/bin/env groovy
 
-
 def gv
 pipeline {
     agent any
     stages {
-         stage("Greet") {
+        stage("Greet") {
             steps {
                 echo "Hello friends"
-                }
             }
         }
         stage("init") {
@@ -22,7 +20,7 @@ pipeline {
             steps {
                 script {
                     echo "building jar"
-                    //gv.buildJar()
+                    // gv.buildJar()
                 }
             }
         }
@@ -30,7 +28,7 @@ pipeline {
             steps {
                 script {
                     echo "building image"
-                    //gv.buildImage()
+                    // gv.buildImage()
                 }
             }
         }
@@ -38,9 +36,9 @@ pipeline {
             steps {
                 script {
                     echo "deploying"
-                    //gv.deployApp()
+                    // gv.deployApp()
                 }
             }
         }
-    }   
+    }
 }
