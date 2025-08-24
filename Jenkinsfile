@@ -1,6 +1,3 @@
-#!/usr/bin/env groovy
-
-def gv
 pipeline {
     agent any
     stages {
@@ -9,34 +6,14 @@ pipeline {
                 echo "Hello friends"
             }
         }
-        stage("init") {
-            steps {
-                script {
-                    gv = load "script.groovy"
-                }
-            }
-        }
-        stage("build jar") {
-            steps {
-                script {
-                    echo "building jar"
-                    // gv.buildJar()
-                }
-            }
-        }
-        stage("build image") {
-            steps {
-                script {
-                    echo "building image"
-                    // gv.buildImage()
-                }
-            }
-        }
         stage("deploy") {
             steps {
                 script {
-                    echo "deploying"
-                    // gv.deployApp()
+                    def dockerCMD = 'docker run -p 3080:3080 -d izhank53/react-nodejs-example:latest'
+                    sshagent(['AzureVmKey']) {
+                        sh " ssh -o StrictHostKeyChecking=no -r * azure@57.159.27.246 ${dockerCMD}"
+                        
+                    }
                 }
             }
         }
